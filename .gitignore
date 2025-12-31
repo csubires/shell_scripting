@@ -1,5 +1,15 @@
 TODO.md
-/setup_config
 *.txt
+**/*.txt
+*.list
+**/*.list
+*.html
+**/*.html
+*.log
+**/*.log
+**/*.md
 /inventories
 *.html
+**/backups
+**/windows
+.trash
