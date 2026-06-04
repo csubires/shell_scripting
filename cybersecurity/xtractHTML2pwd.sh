@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #Colours
 greenColour="\e[0;32m\033[1m"
@@ -29,4 +29,4 @@ while read line; do
 done < "/home/user/Documentos/box/MyScripts/host/html/htmlist.txt"
 
 cat password.txt | awk 'NF==3' | awk '{print $2 "\t\t\t" $3}' | sort | uniq > credentials.txt
-cat -b credentials.txt 
+cat -b credentials.txt

@@ -1,0 +1,1 @@
+shfmt -w -i 4 -ci -sr script.sh

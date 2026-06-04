@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 namewifi=$1
 datawifi=$2

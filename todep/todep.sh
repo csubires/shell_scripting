@@ -6,6 +6,8 @@
 # Author: [Your Name]
 # ============================================
 
+# open /web/index.html
+
 set -e
 
 # --- Configuration ---
@@ -40,7 +42,7 @@ EXT_GROUPS["bash"]="sh zsh awk sed list"
 EXT_GROUPS["grafa"]="Dockerfile docker-compose rules conf yml json"
 
 # --- Functions ---
-usage() {
+function usage() {
     echo "Usage: $0 [mode] [files or paths]"
     echo "Modes:"
     echo "  all      - All recognized file extensions (default)"
@@ -50,17 +52,18 @@ usage() {
     echo "  server   - Docker/Server related files"
     echo "  bash     - Bash scripting"
     echo "  list     - Read file paths from a .list file"
+	echo "  list     - Open HTML prompt IA"
     exit 1
 }
 
-check_filters() {
+function check_filters() {
     [[ -f "$FILTER_DIR/clean_comments.awk" && -f "$FILTER_DIR/remove_empty_lines.sed" ]] || {
         echo "[ERROR] Missing filters in $FILTER_DIR"
         exit 1
     }
 }
 
-check_file_exists() {
+function check_file_exists() {
     if [[ ! -e "$1" ]]; then
         echo "[ERROR] File or path not found: $1"
         exit 1
@@ -68,7 +71,7 @@ check_file_exists() {
 }
 
 # Nueva función para construir el parámetro -prune de find
-build_prune_expression() {
+function build_prune_expression() {
     local prune_expr=""
     local first=true
 
@@ -84,7 +87,7 @@ build_prune_expression() {
     echo "$prune_expr"
 }
 
-get_file_list() {
+function get_file_list() {
     local mode="$1"; shift
     local files=()
     local prune_expr
@@ -139,7 +142,7 @@ get_file_list() {
     echo "${files[@]}"
 }
 
-generate_tree_section() {
+function generate_tree_section() {
     local paths=("$@")
     echo "[INFO] Generating directory tree..." >&2
     echo "========== DIRECTORY TREE =========="
@@ -185,7 +188,7 @@ generate_tree_section() {
     done
 }
 
-process_files() {
+function process_files() {
     local mode="$1"; shift
     local files=("$@")
 
@@ -213,6 +216,9 @@ process_files() {
         bash)
             AWK_FILTER="$FILTER_DIR/clean_comments_bash.awk"
             ;;
+		prompt)
+			open "/home/user/Documents/Scripts/todep/web/index.html"
+			;;
         *)
             AWK_FILTER="$FILTER_DIR/clean_comments.awk"
             ;;
@@ -246,6 +252,7 @@ process_files() {
     done
 
     echo "[INFO] All done. Output saved to: $OUTPUT_FILE"
+    echo "📦 Tamaño del archivo $OUTPUT_FILE: $(stat -c %s "$OUTPUT_FILE" | numfmt --to=iec)"
 }
 
 

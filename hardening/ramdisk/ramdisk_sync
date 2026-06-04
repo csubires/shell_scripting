@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# Sincronizar cada hora
-. /etc/init.d/ramdisk sync

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 sudo ip link set dev wlxe894f61520d0 down
 sudo ip link set dev wlxe894f61520d0 name wlan0

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #Colours
 greenColour="\e[0;32m\033[1m"
@@ -27,23 +27,23 @@ clear
 
 if test -f "$DICTIONARY"; then
 	if [ -d "$HANDSHAKE_FOLDER" ]; then
-    	find "$HANDSHAKE_FOLDER" -name "*.cap" > handshakes_list.txt    	
+    	find "$HANDSHAKE_FOLDER" -name "*.cap" > handshakes_list.txt
     	total_handshakes="$(cat handshakes_list.txt | wc -l)"
     	total_dictionary="$(cat "$DICTIONARY" | wc -l)"
-    	
+
     	echo -ne "\n\t${yellowColour}Diccionario: ${endColour}${grayColour}$DICTIONARY${endColour}"
     	echo -ne "\n\t${yellowColour}Directorio handshakes: ${endColour}${grayColour}$HANDSHAKE_FOLDER${endColour}"
     	echo -ne "\n\t${yellowColour}Número de handshakes: ${endColour}${grayColour}$total_handshakes${endColour}"
     	echo -ne "\n\t${yellowColour}Elementos del diccionario: ${endColour}${grayColour}$total_dictionary${endColour}\n"
-    	
+
     	while read -r line; do
     		let counter+=1
 			echo -ne "\n${blueColour} [$counter/$total_handshakes]${endColour} "
 			echo -ne "\t${yellowColour}aircrack-ng ${endColour}${purpleColour}-w $DICTIONARY${endColour} ${blueColour}$line${endColour}\n"
 			aircrack-ng -w $DICTIONARY $line
-			
+
 		done < 'handshakes_list.txt'
-		
+
 		echo -ne "\n\n\t${greenColour}Tarea finalizada${endColour}"
 		echo -ne "\n\n\t${greenColour}TODO: Mostrar contraseñas encontradas${endColour}\n\n"
 		exit 0

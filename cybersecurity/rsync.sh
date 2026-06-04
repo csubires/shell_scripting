@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Ruta de backup destino (cambia si quieres otro sitio)
 DESTINO_BASE="/home/kali/Documents/BACKUP/rsync_backup"
